@@ -3,7 +3,7 @@
 // @namespace   m_filter
 // @description Фильтр анкет для сайта don-m.ru
 // @include     http://don-m.ru/*
-// @version     1.03
+// @version     1.05
 // @grant       none
 // @author      Eumenes
 // @license     GNU GPL v3
@@ -144,5 +144,22 @@ var titlelist = document.querySelectorAll('.list-girls-item');
 		el.insertBefore(remthis, el.children[0]);
 	}
 });
+
+// Пробегаем по всем миниатюрам анкет на вкладке салоны
+var salonlist = document.querySelectorAll('.salon-girl');
+[].forEach.call(salonlist, function(el) {
+	var girlid = el.getAttribute('data-girlid');
+	if ( (blacklist.indexOf(girlid) !== -1) ? !FBlack : FBlack) {
+		el.remove();
+	} else {
+		var remthis = document.createElement('div');
+		remthis.textContent = 'x';
+		remthis.onclick = removethis;
+		remthis.className = "mbtn";
+		remthis.style.right = parseInt(0) + 'px';
+		el.insertBefore(remthis, el.children[0]);
+	}
+});
+
 // ##############################
 // #endregion
